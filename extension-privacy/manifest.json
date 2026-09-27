@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "Privacy Invasion Detector",
+  "version": "1.0",
+
+  "description": "Extensão para detectar ataques e invsão de privacidade do cliente Web no FireFox",
+
+  "icons": {
+    "48": "icons/track-img.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["borderfy.js"]
+    }
+  ]
+}
