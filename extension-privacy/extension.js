@@ -7,10 +7,10 @@ browser.tabs.query({
     const currentPagePopup = document.getElementById("current-page")
 
     currentPagePopup.textContent = "Página atual: " + currentPage.url
-})
+}) // Pega a URL da página atual e envia para o popup
 
-browser.runtime.onMessage.addListener((message) => {
-    if (message.method === "cookiesInfo") {
+browser.runtime.onMessage.addListener((message) => { // Espera receber a resposta dos arquivos.js no background do manifest.json
+    if (message.method == "cookiesInfo") {
         const qtdCookies = document.getElementById("qtd-cookies")
         const cookiesList = document.getElementById("cookies-list")
         
@@ -34,8 +34,30 @@ browser.runtime.onMessage.addListener((message) => {
         }
     }
 
-    if (message.method === "thirdDomainInfo") {
-        const qtdThirdDomains = document.getElementById("qtd-thirdDomains")
+    if (message.method == "localStorageInfo") {
+        const sizeLocalStorage = document.getElementById("size-local-storage")
+        const dataLocalStorage = document.getElementById("data-local-storage")
+
+        if (message.quantidade > 0) {
+            sizeLocalStorage.textContent = "Tamanho do armazenamento local: " + message.quantidade
+            dataLocalStorage.innerHTML = ""
+
+            for (let storage of message.storages) {
+                const li = document.createElement("li")
+
+                li.textContent = storage.name + ": " + storage.content
+
+                dataLocalStorage.appendChild(li)
+            }
+        }
+
+        else {
+            sizeLocalStorage.textContent = "A página atual não possui armazenamento local"
+        }
+    }
+
+    if (message.method == "thirdDomainInfo") {
+        const qtdThirdDomains = document.getElementById("qtd-third-domains")
         const thirdDomainsList = document.getElementById("domains-list")
 
         if (message.quantidade > 0) {
@@ -51,6 +73,9 @@ browser.runtime.onMessage.addListener((message) => {
             }
         }
     }
+
+    if (message.method == "thirdDomainInfo") {
+    }
 })
 
 browser.runtime.sendMessage({
@@ -59,4 +84,8 @@ browser.runtime.sendMessage({
 
 browser.runtime.sendMessage({
     method: "getThirdDomains"
+})
+
+browser.runtime.sendMessage({
+    method: "getLocalStorage"
 })

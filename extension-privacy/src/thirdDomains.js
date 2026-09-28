@@ -73,7 +73,7 @@ browser.webRequest.onBeforeRequest.addListener(
 )
 
 browser.runtime.onMessage.addListener((message) => {
-    if (message.method === "getThirdDomains") {
+    if (message.method == "getThirdDomains") { // Recebe a requisição do extension.js
         browser.tabs.query({
             currentWindow: true,
             active: true
@@ -81,7 +81,7 @@ browser.runtime.onMessage.addListener((message) => {
             let currentPage = pages[0]
             let domains = thirdPartyDomains[currentPage.id] || []
 
-            browser.runtime.sendMessage({
+            browser.runtime.sendMessage({ // Envia os domínios de terceira parte encontrados
                 method: "thirdDomainInfo",
                 domains: domains,
                 quantidade: domains.length

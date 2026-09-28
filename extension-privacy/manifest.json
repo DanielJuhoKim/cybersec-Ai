@@ -20,14 +20,15 @@
   "background": {
     "scripts": [
       "src/cookies.js",
-      "src/thirdDomains.js"
+      "src/thirdDomains.js",
+      "src/localStorage.js"
     ]
   },
 
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": []
+      "js": ["src/localStorageData.js"]
     }
   ],
 
