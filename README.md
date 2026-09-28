@@ -13,9 +13,11 @@
 
 6. web-ext run para executar a extensão
 
-## Como visualisar quantidade de cookies
+## Como visualisar as informações encontradas pelo script
 1. Inspecionar a extensão em about:debugging
 
 2. Acessar o console
 
-3. Quando acessar uma nova página, recarregar o console
+No console estará as informações que a extensão obteve no navegador
+
+Quando acessar uma nova página, recarregue o console para ver os cookies

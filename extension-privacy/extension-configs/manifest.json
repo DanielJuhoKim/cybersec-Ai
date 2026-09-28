@@ -12,19 +12,21 @@
   "permissions": [
       "tabs",
       "cookies",
+      "webRequest",
       "<all_urls>"
   ],
 
   "background": {
     "scripts": [
-      "cookies.js"
+      "cookies.js",
+      "thirdDomains.js"
     ]
   },
 
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["detector.js"]
+      "js": []
     }
   ]
 }
