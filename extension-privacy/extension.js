@@ -29,6 +29,8 @@ browser.runtime.onMessage.addListener((message) => { // Espera receber a respost
                     li.textContent += "..."
                 }
 
+                li.textContent += "\n| Tipo: " + cookie.type + "\n| " + cookie.persistence
+
                 cookiesList.appendChild(li)
             }
         }
