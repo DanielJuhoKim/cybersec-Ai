@@ -22,7 +22,7 @@
 
 | | | | |
 |---|---|---|---|
-| **Image loaded via document fragment** | Identificação de um tracker que carrega uma imagem criada usando `document fragment` | 1 domínio de terceira parte identificado: `facebook.com` | A requisição feita pela página é direcionado para o `facebook.com`, que é um domínio de terceira parte. A extensão identifica isso e mostra o domínio `facebook.com`, mas informa que a imagem foi criada a partir de `document fragment`. Também foi testado a página de delay, a extensão só começou a identificar domínios 5 segundos depois. |
+| **Image loaded via document fragment** | Identificação de um tracker que carrega uma imagem criada usando `document fragment` | 1 domínio de terceira parte identificado: `facebook.com` | A requisição feita pela página é direcionado para o `facebook.com`, que é um domínio de terceira parte. A extensão identifica isso e mostra o domínio `facebook.com`, mas não informa que a imagem foi criada a partir de `document fragment`. Também foi testado a página de delay, a extensão só começou a identificar domínios 5 segundos depois. |
 
 ![](tracker-report/tracker-document.png)
 
