@@ -40,7 +40,7 @@
 
 | Teste executado | Resultado esperado (reportado pela própria página) | Resultado da extensão | Explicação da divergência |
 |---|---|---|---|
-| **Storage blocking** | A página de teste verifica se o navegador/extensão bloqueia o armazenamento usado por um site | Mostrou o dado armazenado e os cookies gerados no processo | A nossa extensão não é responsável por bloquear ou permitir o armazenamento de dados local, ela apenas mostra quais os dados que estão no armazenamento local.
+| **Storage blocking** | A página de teste verifica se o navegador/extensão bloqueia o armazenamento usado por um site | Mostrou o dado armazenado e os cookies gerados no processo | A nossa extensão não é responsável por bloquear ou permitir o armazenamento de dados local, mas conseguiu mostrar os dados que estão no armazenamento local.
 
 ![](storage-blocking/storage-none.png)
 
@@ -50,6 +50,6 @@
 
 | Teste executado | Resultado esperado (reportado pela própria página) | Resultado da extensão | Explicação da divergência |
 |---|---|---|---|
-| **Fingerprinting canvas verification** | A página verifica o uso do Canvas e coleta características que podem ser utilizadas para fingerprinting do navegador | Identificou e mostra o domínio de terceira parte que recebeu requisição da página | A extensão não valida se as características do navegador podem ser usadas para fingerprinting, mas sim apresentando dados que encontra da página atual do navegador.
+| **Fingerprinting canvas verification** | Verifica o uso do Canvas e coleta características que podem ser utilizadas para fingerprinting do navegador | Identificou e mostra o domínio de terceira parte que recebeu requisição da página | A extensão não valida se as características do navegador podem ser usadas para fingerprinting, mas sim apresentando dados que encontra da página atual do navegador.
 
 ![](fingerprint/fingerprint-canvas.png)
