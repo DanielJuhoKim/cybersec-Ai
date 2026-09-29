@@ -15,7 +15,7 @@ browser.runtime.onMessage.addListener((message) => { // Espera receber a respost
         const cookiesList = document.getElementById("cookies-list")
         
         if (message.quantidade > 0) {
-            qtdCookies.textContent = "Quantidade de cookies: " + message.quantidade
+            qtdCookies.textContent = "Cookies encontrados: " + message.quantidade
 
             cookiesList.innerHTML = ""
 
@@ -23,7 +23,11 @@ browser.runtime.onMessage.addListener((message) => { // Espera receber a respost
 
                 const li = document.createElement("li")
 
-                li.textContent = cookie.name + ": " + cookie.value
+                li.textContent = cookie.name + ": " + cookie.value.substring(0, 10)
+
+                if (cookie.value.length > 10) {
+                    li.textContent += "..."
+                }
 
                 cookiesList.appendChild(li)
             }
@@ -39,20 +43,24 @@ browser.runtime.onMessage.addListener((message) => { // Espera receber a respost
         const dataLocalStorage = document.getElementById("data-local-storage")
 
         if (message.quantidade > 0) {
-            sizeLocalStorage.textContent = "Tamanho do armazenamento local: " + message.quantidade
+            sizeLocalStorage.textContent = "Armazenamento local: size(" + message.quantidade + ")"
             dataLocalStorage.innerHTML = ""
 
             for (let storage of message.storages) {
                 const li = document.createElement("li")
 
-                li.textContent = storage.name + ": " + storage.content
+                li.textContent = storage.name + ": " + storage.content.substring(0, 10)
+
+                if (storage.content.length > 10) {
+                    li.textContent += "..."
+                }
 
                 dataLocalStorage.appendChild(li)
             }
         }
 
         else {
-            sizeLocalStorage.textContent = "A página atual não possui armazenamento local"
+            sizeLocalStorage.textContent = "Esta página não tem armazenamento local"
         }
     }
 
@@ -61,7 +69,7 @@ browser.runtime.onMessage.addListener((message) => { // Espera receber a respost
         const thirdDomainsList = document.getElementById("domains-list")
 
         if (message.quantidade > 0) {
-            qtdThirdDomains.textContent = "Quantidade de domínios: " + message.quantidade
+            qtdThirdDomains.textContent = "Domínios de terceira parte: " + message.quantidade
             thirdDomainsList.innerHTML = ""
 
             for (let domain of message.domains) {
@@ -72,9 +80,9 @@ browser.runtime.onMessage.addListener((message) => { // Espera receber a respost
                 thirdDomainsList.appendChild(li)
             }
         }
-    }
-
-    if (message.method == "thirdDomainInfo") {
+        else {
+            qtdThirdDomains.textContent = "Nenhum domínio de terceira parte foi identificado"
+        }
     }
 })
 

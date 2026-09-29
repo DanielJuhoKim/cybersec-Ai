@@ -17,14 +17,14 @@ function getMainDomain(domain) {
 
     let parts = domain.split(".")
 
-    if (parts.length < 2) {
-        return domain
+    if (parts.length >= 3 && parts[parts.length - 1] === "br") {
+        return parts.slice(-3).join(".")
     }
 
     return parts.slice(-2).join(".")
 }
 
-function isThirdParty(pageDomain, requestDomain) { // Verifica se a requisição veio de um terceiro
+function isThirdParty(pageDomain, requestDomain) { // Verifica se a requisição é para um domínio de terceira parte
     if (!pageDomain || !requestDomain) {
         return false
     }
@@ -38,6 +38,7 @@ function isThirdParty(pageDomain, requestDomain) { // Verifica se a requisição
 browser.webRequest.onBeforeRequest.addListener(
     function(infos) {
         console.log("Requisição detectada")
+        
 
         if (infos.tabId < 0) { // Ignora a requisição se ela não está relacionada à nenhuma página
             return
@@ -57,12 +58,14 @@ browser.webRequest.onBeforeRequest.addListener(
 
             if (isThirdParty( currentPage, requestDomain )) {
                 console.log("Domínio veio de um terceiro")
+
                 if (!thirdPartyDomains[infos.tabId]) {
                     thirdPartyDomains[infos.tabId] = []
                 }
 
-                if (!thirdPartyDomains[infos.tabId].includes(requestDomain)) {
-                    thirdPartyDomains[infos.tabId].push(requestDomain)
+                const mainDomain = getMainDomain(requestDomain)
+                if (!thirdPartyDomains[infos.tabId].includes(mainDomain)) {
+                    thirdPartyDomains[infos.tabId].push(mainDomain)
                 }
             }
         })
